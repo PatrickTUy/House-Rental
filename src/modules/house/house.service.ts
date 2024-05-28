@@ -15,8 +15,18 @@ export class HouseService {
     createHouseInput: CreateHouseInput,
     files: { photos: Express.Multer.File[] },
   ): Promise<any> {
-    const { name, description, amount, location, type, ownerId } =
-      createHouseInput;
+    const {
+      name,
+      description,
+      amount,
+      location,
+      type,
+      rooms,
+      baths,
+      propertySize,
+      lotSize,
+      ownerId,
+    } = createHouseInput;
 
     try {
       if (
@@ -57,6 +67,10 @@ export class HouseService {
           location:$location,
           type:$type,
           amount:$amount,
+          rooms:$rooms,
+          baths:$baths,
+          propertySize:$propertySize,
+          lotSize:$lotSize,
           ownerId:$ownerId,
           photos:$photos
         })
@@ -148,15 +162,14 @@ export class HouseService {
   }
 
   async deleteHouse(id: string): Promise<any> {
-    console.log(id, 'this is the id chosen');
     const result = await this.queryRepo
       .initQuery()
       .raw(
         `
-    MATCH (house: House {Id: $id}) 
+    MATCH (house: House {id: $id}) 
         WITH house, count(house) as houseCount
         WHERE houseCount > 0
-        DELETE house
+        DETACH DELETE house
         RETURN houseCount
     `,
         { id },

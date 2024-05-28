@@ -15,6 +15,10 @@ export class HouseInput {
     location: string;
     amount: string;
     type: string;
+    rooms?: Nullable<number>;
+    baths?: Nullable<number>;
+    propertySize: number;
+    lotSize?: Nullable<number>;
     ownerId: string;
     photos: Nullable<string>[];
 }
@@ -50,10 +54,15 @@ export class House {
     photos: Nullable<string>[];
 }
 
+export class ResponseObject {
+    statusCode?: Nullable<number>;
+    message?: Nullable<string>;
+}
+
 export abstract class IMutation {
     abstract addHouse(houseInput: HouseInput): House | Promise<House>;
 
-    abstract deleteHouse(id: string): Nullable<House> | Promise<Nullable<House>>;
+    abstract deleteHouse(id: string): Nullable<ResponseObject> | Promise<Nullable<ResponseObject>>;
 
     abstract registerUser(userInput: UserInput): Nullable<User> | Promise<Nullable<User>>;
 

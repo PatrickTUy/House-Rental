@@ -15,8 +15,17 @@ input HouseInput {
   location: String!
   amount: String!
   type: String!
+  rooms: Int
+  baths: Int
+  propertySize: Int!
+  lotSize: Int
   ownerId: ID!
   photos: [String]!
+}
+
+type ResponseObject {
+  statusCode: Int
+  message: String
 }
 
 type Query {
@@ -26,5 +35,5 @@ type Query {
 
 type Mutation {
   addHouse(houseInput: HouseInput!): House!
-  deleteHouse(id: ID!): House
+  deleteHouse(id: ID!): ResponseObject
 }

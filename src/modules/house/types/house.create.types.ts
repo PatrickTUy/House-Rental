@@ -4,6 +4,7 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  IsNumber,
   IsArray,
   ArrayNotEmpty,
   IsUUID,
@@ -40,6 +41,24 @@ export class CreateHouseInput {
   @IsNotEmpty()
   @IsDefined()
   readonly type: string;
+
+  @Field()
+  @IsNumber()
+  readonly rooms: number;
+
+  @Field()
+  @IsNumber()
+  readonly baths: number;
+
+  @Field()
+  @IsNumber()
+  readonly lotSize: number;
+
+  @Field()
+  @IsNumber()
+  @IsNotEmpty()
+  @IsDefined()
+  readonly propertySize: number;
 
   @Field()
   @IsNotEmpty()
