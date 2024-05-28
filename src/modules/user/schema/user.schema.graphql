@@ -1,0 +1,32 @@
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  phone: String!
+  userType: String!
+  password: String
+}
+
+input UserInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  phone: String!
+  userType: String!
+  password: String
+}
+
+type FileUpload {
+  picture: String
+}
+
+type Query {
+  getUsers: [User]
+  getUser(id: ID!): User!
+}
+
+type Mutation {
+  registerUser(userInput: UserInput!): User
+  deleteUser(id: ID!): User
+}
