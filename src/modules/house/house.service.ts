@@ -188,4 +188,28 @@ export class HouseService {
       message: 'House deleted successfully',
     };
   }
+
+  // async deleteHouse(id: string): Promise<any> {
+  //   const result = await this.queryRepo
+  //     .initQuery()
+  //     .raw(
+  //       `
+  //   MATCH (house: House {id: $id})
+  //       WITH house, count(house) as houseCount
+  //       WHERE houseCount > 0
+  //       DETACH DELETE house
+  //       RETURN houseCount
+  //   `,
+  //       { id },
+  //     )
+  //     .run();
+
+  //   if (result[0]?.userCount === 0 || result?.length === 0) {
+  //     throw new HttpException('House not found', HttpStatus.BAD_REQUEST);
+  //   }
+  //   return {
+  //     statusCode: HttpStatus.OK,
+  //     message: 'House deleted successfully',
+  //   };
+  // }
 }
