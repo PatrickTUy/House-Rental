@@ -86,6 +86,10 @@ export class HouseService {
             location,
             type,
             amount,
+            rooms,
+            baths,
+            propertySize,
+            lotSize,
             photos: images,
           },
         )
