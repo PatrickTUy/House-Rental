@@ -1,0 +1,39 @@
+type House {
+  id: ID!
+  name: String!
+  description: String!
+  location: String!
+  amount: String!
+  ownerId: ID!
+  photos: [String]!
+}
+
+input HouseInput {
+  id: ID!
+  name: String!
+  description: String!
+  location: String!
+  amount: String!
+  type: String!
+  rooms: Int
+  baths: Int
+  propertySize: Int!
+  lotSize: Int
+  ownerId: ID!
+  photos: [String]!
+}
+
+type ResponseObject {
+  statusCode: Int
+  message: String
+}
+
+type Query {
+  getHouses: [House]
+  getHouse(id: ID!): House
+}
+
+type Mutation {
+  addHouse(houseInput: HouseInput!): House!
+  deleteHouse(id: ID!): ResponseObject
+}
