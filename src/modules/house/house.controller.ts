@@ -5,11 +5,12 @@ import {
   HttpStatus,
   Post,
   Patch,
+  Param,
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
 import { HouseService } from './house.service';
-import { CreateHouseInput } from './types/house.create.types';
+import { CreateHouseInput, UpdateHouseInput } from './types/house.create.types';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { HouseInput } from 'src/database/graphql/graphql';
 
@@ -39,14 +40,14 @@ export class HouseController {
   @Patch(':id')
   @UseInterceptors(FileFieldsInterceptor([{ name: 'photos', maxCount: 20 }]))
   async updateHouse(
-    @Body() houseInput: CreateHouseInput,
+    @Body() houseInput: UpdateHouseInput,
     @UploadedFiles()
     files: {
       photos: Express.Multer.File[];
     },
   ) {
     try {
-      return await this.houseService.createHouse(houseInput, files);
+      return await this.houseService.updateHouse(id, houseInput, files);
     } catch (error) {
       throw new HttpException(
         error.message || 'Internal Server Error',
