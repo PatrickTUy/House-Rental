@@ -4,6 +4,7 @@ import {
   HttpException,
   HttpStatus,
   Post,
+  Patch,
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
@@ -19,6 +20,25 @@ export class HouseController {
   @Post('')
   @UseInterceptors(FileFieldsInterceptor([{ name: 'photos', maxCount: 20 }]))
   async createHouse(
+    @Body() houseInput: CreateHouseInput,
+    @UploadedFiles()
+    files: {
+      photos: Express.Multer.File[];
+    },
+  ) {
+    try {
+      return await this.houseService.createHouse(houseInput, files);
+    } catch (error) {
+      throw new HttpException(
+        error.message || 'Internal Server Error',
+        error.status || HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  @Patch(':id')
+  @UseInterceptors(FileFieldsInterceptor([{ name: 'photos', maxCount: 20 }]))
+  async updateHouse(
     @Body() houseInput: CreateHouseInput,
     @UploadedFiles()
     files: {
