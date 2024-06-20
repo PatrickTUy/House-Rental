@@ -37,22 +37,22 @@ export class HouseController {
     }
   }
 
-  @Patch(':id')
-  @UseInterceptors(FileFieldsInterceptor([{ name: 'photos', maxCount: 20 }]))
-  async updateHouse(
-    @Body() houseInput: UpdateHouseInput,
-    @UploadedFiles()
-    files: {
-      photos: Express.Multer.File[];
-    },
-  ) {
-    try {
-      return await this.houseService.updateHouse(id, houseInput, files);
-    } catch (error) {
-      throw new HttpException(
-        error.message || 'Internal Server Error',
-        error.status || HttpStatus.INTERNAL_SERVER_ERROR,
-      );
-    }
-  }
+  // @Patch(':id')
+  // @UseInterceptors(FileFieldsInterceptor([{ name: 'photos', maxCount: 20 }]))
+  // async updateHouse(
+  //   @Body() houseInput: UpdateHouseInput,
+  //   @UploadedFiles()
+  //   files: {
+  //     photos: Express.Multer.File[];
+  //   },
+  // ) {
+  //   try {
+  //     return await this.houseService.updateHouse(id, houseInput, files);
+  //   } catch (error) {
+  //     throw new HttpException(
+  //       error.message || 'Internal Server Error',
+  //       error.status || HttpStatus.INTERNAL_SERVER_ERROR,
+  //     );
+  //   }
+  // }
 }
